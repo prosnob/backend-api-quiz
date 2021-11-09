@@ -30,7 +30,7 @@ Route::put("/author/{id}",[AuthorController::class, "update"]);
 Route::delete("/author/{id}",[AuthorController::class, "destroy"]);
 
 
-// Route Author 
+// Route Book
 
 Route::get("/book",[BookController::class, "index"]);
 Route::get("/book/{id}",[BookController::class, "show"]);

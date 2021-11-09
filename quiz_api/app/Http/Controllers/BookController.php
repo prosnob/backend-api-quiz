@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Http\Resources\BookResource;
+
 
 class BookController extends Controller
 {
@@ -14,7 +16,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::orderBy('id','desc')->get();
+        return BookResource::collection(Book::with(["author"])->orderBy('id','desc')->get());
+        // return Book::with(["authors"])->latest()->get();
     }
 
     /**
@@ -26,8 +29,9 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title"=>"string|min:3|max:10",
-            "body"=>"string|min:3|max:50"
+            "title"=>"min:3|max:10",
+            "body"=>"min:3|max:50"
+
         ]);
 
         $book = new Book();
@@ -46,7 +50,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        return Book::findOrFail($id);
+        return new BookResource(Book::with(["author"])->findOrFail($id));
+        
     }
 
     /**
@@ -58,10 +63,10 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            "title"=>"string|min:3|max:10",
-            "body"=>"string|min:3|max:50"
-        ]);
+        // $request->validate([
+        //     "title"=>"string|min:3|max:10",
+        //     "body"=>"string|min:3|max:50"
+        // ]);
         $book = Book::findOrFail($id);
         $book->title = $request->title;
         $book->body = $request->body;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Author;
+use App\Http\Resources\AuthorResource;
 
 
 class AuthorController extends Controller
@@ -15,7 +16,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return Author::get();
+        return AuthorResource::collection(Author::with(["books"])->take(3)->get());
     }
 
     /**
@@ -27,14 +28,14 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name"=>"string|min:3|max:30",
+            "name"=>"min:3|max:30",
             "age"=>"integer|min:1|max:30",
-            "province"=>"nullable"
+            "provice"=>"nullable"
         ]);
         $author = new Author();
         $author->name = $request->name;
         $author->age = $request->age;
-        $author->provice = $request->province;
+        $author->provice = $request->provice;
         $author->save();
 
         return response()->json(["message"=>"Author created"],201);
@@ -49,7 +50,7 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        return Author::findOrFail($id);
+        return new AuthorResource(Author::findOrFail($id));
     }
 
     /**
@@ -62,14 +63,14 @@ class AuthorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "name"=>"string|min:3|max:30",
-            "age"=>"integer|min:1|max:30",
-            "province"=>"nullable"
+            "name"=>"min:3|max:10",
+            "age"=>"integer|min:1|max:10",
+            "provice"=>"nullable"
         ]);
         $author = Author::findOrFail($id);
         $author->name = $request->name;
         $author->age = $request->age;
-        $author->provice = $request->province;
+        $author->provice = $request->provice;
         $author->save();
 
         return response()->json(["message"=>"Author updated"],200);

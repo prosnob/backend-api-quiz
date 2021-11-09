@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2021 at 03:31 AM
+-- Generation Time: Nov 09, 2021 at 10:24 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -31,7 +31,7 @@ CREATE TABLE `authors` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(11) NOT NULL,
-  `provice` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,7 +43,13 @@ CREATE TABLE `authors` (
 INSERT INTO `authors` (`id`, `name`, `age`, `provice`, `created_at`, `updated_at`) VALUES
 (4, 'Kanha', 27, 'Banteay Meanchey', '2021-11-04 18:44:24', '2021-11-04 18:44:24'),
 (5, 'Thida', 24, 'Siem Reap', '2021-11-04 18:44:41', '2021-11-04 18:44:41'),
-(6, 'Banda', 24, 'Phnom Penh', '2021-11-04 18:45:20', '2021-11-04 18:45:20');
+(6, 'Banda', 24, 'Phnom Penh', '2021-11-04 18:45:20', '2021-11-04 18:45:20'),
+(9, 'Dara', 32, 'Banteay Meanchey', '2021-11-08 10:07:34', '2021-11-08 10:07:34'),
+(10, 'Gira', 30, 'Kandal', '2021-11-08 10:08:06', '2021-11-08 10:08:06'),
+(11, 'Ka', 1, 'dsf', '2021-11-09 07:00:28', '2021-11-09 07:00:28'),
+(12, 'data', 1, 'SR', '2021-11-09 07:19:46', '2021-11-09 07:19:46'),
+(13, 'raka', 1, NULL, '2021-11-09 07:24:12', '2021-11-09 07:24:12'),
+(14, 'Wara', 27, NULL, '2021-11-09 07:25:38', '2021-11-09 07:25:38');
 
 -- --------------------------------------------------------
 
@@ -66,7 +72,11 @@ CREATE TABLE `books` (
 
 INSERT INTO `books` (`id`, `author_id`, `title`, `body`, `created_at`, `updated_at`) VALUES
 (1, 4, 'Love', 'Love is good', '2021-11-04 19:00:27', '2021-11-04 19:00:27'),
-(2, 5, 'History', 'History is good', '2021-11-04 19:00:48', '2021-11-04 19:00:48');
+(2, 5, 'History', 'History is good', '2021-11-04 19:00:48', '2021-11-04 19:00:48'),
+(5, 4, 'Reading', 'Reading is the best.', '2021-11-06 23:09:46', '2021-11-06 23:09:46'),
+(7, 9, 'First Step', 'Take your first to reach your dream.', '2021-11-08 10:11:27', '2021-11-08 10:11:27'),
+(8, 10, 'Go far', 'Far or near is okay to start.', '2021-11-08 10:12:03', '2021-11-08 10:12:03'),
+(9, 10, 'Goood', 'GOood', '2021-11-09 06:58:53', '2021-11-09 06:58:53');
 
 -- --------------------------------------------------------
 
@@ -214,13 +224,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
